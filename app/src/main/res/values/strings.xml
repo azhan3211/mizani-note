@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MNote</string>
+    <string name="channel_name">MNote Channel Name</string>
+    <string name="channel_description">MNote Channel Description</string>
+    <string name="delete_note_title">Are you sure want to delete this?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>
