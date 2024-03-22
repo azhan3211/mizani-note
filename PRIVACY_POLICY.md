@@ -26,5 +26,6 @@ The security of your data is important to us. The notes you create using our Ser
 # Contact Us
 If you have any questions about this Privacy Policy, please contact us:
 
-Email: m.azhanmizani21@gmail.comm
+Email: m.azhanmizani21@gmail.com
+
 By using our MNote app, you agree to the terms and conditions of this Privacy Policy. If you do not agree with this policy, please do not use our app.
