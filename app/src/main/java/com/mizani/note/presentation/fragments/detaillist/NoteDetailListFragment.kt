@@ -42,7 +42,7 @@ class NoteDetailListFragment : FragmentBase() {
 
     private val adapter by lazy {
         NoteAdapter {
-            (activity as? NoteActivity)?.gotoDetailNote(it)
+            (activity as? NoteActivity)?.gotoDetailNote(it.id.orZero())
         }
     }
 

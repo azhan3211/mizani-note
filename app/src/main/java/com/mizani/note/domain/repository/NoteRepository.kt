@@ -12,4 +12,5 @@ interface NoteRepository {
     fun update(note: NoteDto)
     fun getNote(id: Long): NoteDto
     fun delete(id: Long)
+    fun deleteByCategory(categoryId: Long)
 }

@@ -1,12 +1,14 @@
 package com.mizani.note.presentation.fragments.note
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mizani.note.data.dto.NoteByCategoryDto
 import com.mizani.note.domain.repository.CategoryRepository
 import com.mizani.note.domain.repository.NoteRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import java.util.*
 
 class NoteViewModel(
@@ -15,9 +17,11 @@ class NoteViewModel(
 ) : ViewModel() {
 
     private var currentDate = Calendar.getInstance().time
+    private val _noteData = MutableLiveData<List<NoteByCategoryDto>>()
+    val noteData: LiveData<List<NoteByCategoryDto>> = _noteData
 
-    fun getNote(date: Date = Calendar.getInstance().time): Flow<List<NoteByCategoryDto>> {
-        return flow {
+    fun getNote(date: Date = Calendar.getInstance().time) {
+        viewModelScope.launch {
             noteRepository.getAllNote(date).collect { notes ->
                 val data = arrayListOf<NoteByCategoryDto>()
                 val categories = categoryRepository.getAll().first()
@@ -26,13 +30,13 @@ class NoteViewModel(
                     if (notesGrouped.isNotEmpty()) {
                         data.add(
                             NoteByCategoryDto(
-                            category,
-                            notesGrouped
-                        )
+                                category,
+                                notesGrouped
+                            )
                         )
                     }
                 }
-                emit(data)
+                _noteData.value = data
             }
         }
     }

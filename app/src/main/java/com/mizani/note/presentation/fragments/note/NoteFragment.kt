@@ -7,20 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mizani.note.R
 import com.mizani.note.data.dto.NoteByCategoryDto
 import com.mizani.note.presentation.NoteActivity
 import com.mizani.note.presentation.adapter.NoteSectionAdapter
 import com.mizani.note.presentation.dialog.DateTimeDialog
+import com.mizani.note.utils.DataTypeExt.orZero
 import com.mizani.note.utils.DateFormatter
 import com.mizani.note.utils.DateFormatter.convertToReadable
 import com.mizani.note.utils.ViewExt.visibleIf
-import kotlinx.android.synthetic.main.fragment_note.*
-import kotlinx.android.synthetic.main.view_search.*
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.fragment_note.note_add_category_textview
+import kotlinx.android.synthetic.main.fragment_note.note_add_fab
+import kotlinx.android.synthetic.main.fragment_note.note_calendar_imageview
+import kotlinx.android.synthetic.main.fragment_note.note_content_linearlayout
+import kotlinx.android.synthetic.main.fragment_note.note_date_textview
+import kotlinx.android.synthetic.main.fragment_note.note_empty_view
+import kotlinx.android.synthetic.main.fragment_note.note_recyclerview
+import kotlinx.android.synthetic.main.view_search.view_search_edittext
 import org.koin.android.ext.android.inject
 import java.util.Calendar
 
@@ -41,9 +45,12 @@ class NoteFragment : Fragment() {
     }
 
     private fun onNoteClicked(noteSection: NoteSection) {
-        when(noteSection) {
-            is NoteSection.Note -> (activity as? NoteActivity)?.gotoDetailNote(noteSection.note)
-            is NoteSection.ViewMore -> (activity as? NoteActivity)?.gotoMoreList(noteSection.categoryDto, viewModel.getCurrentDate())
+        when (noteSection) {
+            is NoteSection.Note -> (activity as? NoteActivity)?.gotoDetailNote(noteSection.note.id.orZero())
+            is NoteSection.ViewMore -> (activity as? NoteActivity)?.gotoMoreList(
+                noteSection.categoryDto,
+                viewModel.getCurrentDate()
+            )
         }
     }
 
@@ -77,10 +84,11 @@ class NoteFragment : Fragment() {
                 val date = DateFormatter.setDate(year, month, day)
                 viewModel.setCurrentData(date)
                 note_date_textview.text = date.convertToReadable("EEE, dd MMM yyyy")
-                lifecycleScope.launch {
-                    setupView(viewModel.getNote(date).first())
-                }
+                viewModel.getNote(date)
             }.show()
+        }
+        note_add_category_textview.setOnClickListener {
+            (activity as? NoteActivity)?.gotoCategory()
         }
     }
 
@@ -96,11 +104,10 @@ class NoteFragment : Fragment() {
     }
 
     private fun viewModelObserver() {
-        lifecycleScope.launch {
-            viewModel.getNote().collect {
-                setupView(it)
-                setupCurrentDateLabel()
-            }
+        viewModel.getNote()
+        viewModel.noteData.observe(viewLifecycleOwner) {
+            setupView(it)
+            setupCurrentDateLabel()
         }
     }
 

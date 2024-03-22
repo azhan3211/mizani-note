@@ -52,8 +52,7 @@ class NoteAddViewModel(
             categoryId = categoryRepository.insert(
                 CategoryDto(
                 name = newCategory
-            )
-            )
+            ))
         }
         return categoryId.orZero()
     }

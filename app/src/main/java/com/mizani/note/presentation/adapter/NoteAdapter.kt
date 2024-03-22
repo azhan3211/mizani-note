@@ -58,7 +58,7 @@ class NoteAdapter(
             this.dataModified.addAll(data)
         } else {
             val searchData = this.data.filter { note ->
-                note.title.contains(keyword) || note.description.contains(keyword)
+                note.title.lowercase().contains(keyword.lowercase()) || note.description.lowercase().contains(keyword.lowercase())
             }
             if (searchData.isNotEmpty()) {
                 this.dataModified.addAll(searchData)

@@ -7,7 +7,9 @@ import java.util.Date
 interface NoteInterface {
 
     fun gotoAddNote()
-    fun gotoDetailNote(note: NoteDto)
+    fun gotoDetailNote(id: Long)
     fun gotoMoreList(categoryDto: CategoryDto, date: Date)
+
+    fun gotoCategory()
 
 }

@@ -11,5 +11,5 @@ data class NoteDto(
     val color: String? = null,
     val isRepeated: Boolean = false,
     val isReminderSet: Boolean = false,
-    val category: Long
+    val category: Long = 0L
 ): Serializable

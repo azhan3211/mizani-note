@@ -9,6 +9,7 @@ import com.mizani.note.domain.repository.CategoryRepository
 import com.mizani.note.domain.repository.NoteRepository
 import com.mizani.note.data.repository.NoteRepositoryImpl
 import com.mizani.note.presentation.fragments.add.NoteAddViewModel
+import com.mizani.note.presentation.fragments.category.CategoryViewModel
 import com.mizani.note.presentation.fragments.detaillist.DetailListViewModel
 import com.mizani.note.presentation.fragments.note.NoteViewModel
 import com.mizani.note.presentation.fragments.update.NoteUpdateViewModel
@@ -72,6 +73,10 @@ class MNoteApplication : Application() {
 
         viewModel {
             DetailListViewModel(get())
+        }
+
+        viewModel {
+            CategoryViewModel(get(), get())
         }
     }
 

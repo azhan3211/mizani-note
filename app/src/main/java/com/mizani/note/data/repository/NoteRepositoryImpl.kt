@@ -54,4 +54,8 @@ class NoteRepositoryImpl(private val noteDao: NoteDao): NoteRepository {
         noteDao.delete(id)
     }
 
+    override fun deleteByCategory(categoryId: Long) {
+        noteDao.deleteByCategory(categoryId)
+    }
+
 }

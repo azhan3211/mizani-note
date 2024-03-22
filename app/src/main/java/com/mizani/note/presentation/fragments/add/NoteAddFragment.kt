@@ -20,7 +20,6 @@ import com.mizani.note.presentation.adapter.NoteColorAdapter
 import com.mizani.note.presentation.base.FragmentBase
 import com.mizani.note.presentation.dialog.DateTimeDialog
 import com.mizani.note.utils.DataTypeExt.orZero
-import com.mizani.note.utils.alarm.AlarmUtil
 import com.mizani.note.utils.DateFormatter.convertToReadable
 import com.mizani.note.utils.InputValidation.throwWhenEmpty
 import com.mizani.note.utils.ViewExt.disableIf
@@ -28,9 +27,26 @@ import com.mizani.note.utils.ViewExt.enableIf
 import com.mizani.note.utils.ViewExt.gone
 import com.mizani.note.utils.ViewExt.visible
 import com.mizani.note.utils.ViewExt.visibleIf
-import kotlinx.android.synthetic.main.fragment_add_note.*
+import com.mizani.note.utils.alarm.AlarmUtil
+import com.mizani.note.utils.alarm.AlarmUtil.permissionAlarm
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_back_imageview
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_cancel_button
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_category_edittext
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_category_imageview
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_category_linearlayout
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_category_spinner
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_date_edittext
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_description_edittext
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_recyclerview
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_reminder_linearlayout
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_repeated_switchcompat
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_save_button
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_switchcompat
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_time_edittext
+import kotlinx.android.synthetic.main.fragment_add_note.note_add_title_edittext
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+
 class NoteAddFragment : FragmentBase() {
 
     private val viewModel: NoteAddViewModel by inject()
@@ -55,7 +71,8 @@ class NoteAddFragment : FragmentBase() {
     }
 
     private fun setupColorAdapter() {
-        note_add_recyclerview.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        note_add_recyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         note_add_recyclerview.adapter = colorAdapter
     }
 
@@ -90,8 +107,10 @@ class NoteAddFragment : FragmentBase() {
                     viewModel.setNewCategory("")
                 }
 
-                val note = getNoteData()
-                viewModel.insert(note)
+                permissionAlarm(requireContext()) {
+                    val note = getNoteData()
+                    viewModel.insert(note)
+                }
             } catch (e: Exception) {
 
             }
@@ -130,7 +149,8 @@ class NoteAddFragment : FragmentBase() {
         }
         val items = arrayListOf("Select Category")
         items.addAll(categories.map { it.name })
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
         note_add_category_spinner.adapter = adapter
 
         note_add_category_spinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -156,7 +176,8 @@ class NoteAddFragment : FragmentBase() {
 
     private fun setAlarm(note: NoteDto, isCancel: Boolean = false) {
         val intent = AlarmUtil.getIntentNote(requireContext(), note)
-        val pendingIntent = AlarmUtil.getPendingIntent(requireContext(), intent, note.id?.toInt().orZero())
+        val pendingIntent =
+            AlarmUtil.getPendingIntent(requireContext(), intent, note.id?.toInt().orZero())
         if (isCancel) {
             AlarmUtil.cancelAlarm(requireContext(), pendingIntent)
         } else {

@@ -5,4 +5,9 @@
     <string name="delete_note_title">Are you sure want to delete this?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="please_select_category">Please select category!</string>
+    <string name="select_category">"Select Category"</string>
+    <string name="category">Category</string>
+    <string name="delete_category">Delete Category</string>
+    <string name="delete_category_description">All note with this category will be deleted.</string>
 </resources>

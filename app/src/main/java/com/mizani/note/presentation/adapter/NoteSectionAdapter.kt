@@ -65,7 +65,7 @@ class NoteSectionAdapter(
             val searchData = arrayListOf<NoteByCategoryDto>()
             this.data.forEach {
                 val filteredNotes = it.notes.filter { note ->
-                    note.title.contains(keyword) || note.description.contains(keyword)
+                    note.title.lowercase().contains(keyword.lowercase()) || note.description.lowercase().contains(keyword.lowercase())
                 }
                 if (filteredNotes.isNotEmpty()) {
                     val data = it.copy(notes = filteredNotes)
