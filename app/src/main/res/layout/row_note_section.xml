@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="18dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="18dp">
 
         <TextView
             android:id="@+id/row_note_section_textview"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:text="Title"
@@ -27,11 +27,11 @@
             android:id="@+id/row_note_section_more_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="See More"
+            android:text="@string/see_more"
             android:textSize="14sp"
             android:textColor="@android:color/holo_blue_light"
             android:textStyle="bold"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginStart="8dp"/>
 
     </LinearLayout>
 
@@ -47,7 +47,7 @@
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="2"
             android:clipToPadding="true"
-            android:paddingRight="16dp"/>
+            android:paddingEnd="16dp"/>
     </RelativeLayout>
 
 </LinearLayout>

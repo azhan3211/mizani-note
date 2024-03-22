@@ -15,6 +15,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No reminder or note for today"/>
+        android:text="@string/no_reminder_or_note_for_today"/>
 
 </LinearLayout>

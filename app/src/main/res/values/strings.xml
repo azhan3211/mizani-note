@@ -10,4 +10,12 @@
     <string name="category">Category</string>
     <string name="delete_category">Delete Category</string>
     <string name="delete_category_description">All note with this category will be deleted.</string>
+    <string name="reminder">Reminder</string>
+    <string name="repeated">Repeated</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="see_more">See More</string>
+    <string name="no_reminder_or_note_for_today">No reminder or note for today</string>
 </resources>

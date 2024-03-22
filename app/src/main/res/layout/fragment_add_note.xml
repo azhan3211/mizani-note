@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:clickable="true"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:focusable="true">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -74,7 +75,7 @@
 
                     <Spinner
                         android:id="@+id/note_add_category_spinner"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
@@ -82,7 +83,7 @@
                         android:id="@+id/note_add_category_imageview"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
                         android:background="@drawable/rounded_green"
                         app:srcCompat="@drawable/ic_add"/>
 
@@ -120,8 +121,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reminder"
-                    android:layout_marginRight="20dp"
+                    android:text="@string/reminder"
+                    android:layout_marginEnd="20dp"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -149,8 +150,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Repeated"
-                        android:layout_marginRight="20dp"
+                        android:text="@string/repeated"
+                        android:layout_marginEnd="20dp"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
 
@@ -172,11 +173,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="16dp"
-                        android:hint="Date"
+                        android:hint="@string/date"
                         android:focusable="false"
                         android:background="@drawable/rounded_date"
-                        android:layout_marginRight="8dp"
-                        android:drawableRight="@drawable/ic_calendar"/>
+                        android:layout_marginEnd="8dp"
+                        android:drawableEnd="@drawable/ic_calendar"/>
 
                     <EditText
                         android:id="@+id/note_add_time_edittext"
@@ -184,11 +185,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="16dp"
-                        android:hint="Time"
+                        android:hint="@string/time"
                         android:focusable="false"
                         android:background="@drawable/rounded_date"
-                        android:layout_marginLeft="8dp"
-                        android:drawableRight="@drawable/ic_clock"/>
+                        android:layout_marginStart="8dp"
+                        android:drawableEnd="@drawable/ic_clock"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -223,7 +224,7 @@
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:layout_marginBottom="3dp"
-                    android:text="Cancel"/>
+                    android:text="@string/cancel"/>
 
                 <Button
                     android:id="@+id/note_add_save_button"
@@ -233,7 +234,7 @@
                     android:textColor="@android:color/white"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    android:text="Save"/>
+                    android:text="@string/save"/>
 
             </LinearLayout>
 
